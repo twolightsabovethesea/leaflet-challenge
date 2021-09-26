@@ -17,7 +17,7 @@ var map = L.map("map", {
   streetmap.addTo(map);
 
 
-d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/significant_month.geojson")
+d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson")
 .then(function(data) {
     console.log(data)
 });
