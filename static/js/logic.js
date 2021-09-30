@@ -7,7 +7,7 @@ d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geoj
   });
 
 
-  function createFeatures(earthquakeData) {
+  function createFeatures(quakeData) {
 
     // Define a function that we want to run once for each feature in the features array.
     // Give each feature a popup that describes the place and time of the earthquake.
@@ -17,7 +17,7 @@ d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geoj
   
     // Create a GeoJSON layer that contains the features array on the earthquakeData object.
     // Run the onEachFeature function once for each piece of data in the array.
-    var earthquakes = L.geoJSON(earthquakeData, {
+    var earthquakes = L.geoJSON(quakeData, {
       onEachFeature: onEachFeature
     });
   
@@ -33,13 +33,14 @@ d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geoj
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         });
   
+    // creates a topographic layer
     var topo = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
       attribution: 'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
     });
   
     // Create a baseMaps object.
     var baseMaps = {
-      "Street Map": street,
+      "Street Map": streetmap,
       "Topographic Map": topo
     };
   
@@ -53,8 +54,8 @@ d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geoj
       center: [
         37.09, -95.71
       ],
-      zoom: 5,
-      layers: [street, earthquakes]
+      zoom: 3,
+      layers: [streetmap, earthquakes]
     });
   
     // Create a layer control.
