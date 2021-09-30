@@ -10,14 +10,14 @@ d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geoj
 // create a function
   function createFeatures(quakeData) {
 
-    // Define a function that we want to run once for each feature in the features array.
-    // Give each feature a popup that describes the place and time of the earthquake.
+    // creates a function that will run once for each feature in the features array
+    // for each feature adds a popup that describes the place and time of the earthquake
     function onEachFeature(feature, layer) {
       layer.bindPopup(`<h3>${feature.properties.place}</h3><hr><p>${new Date(feature.properties.time)}</p>`);
     }
   
-    // Create a GeoJSON layer that contains the features array on the earthquakeData object.
-    // Run the onEachFeature function once for each piece of data in the array.
+    // creates a GeoJSON layer that contains the features array on the quakeData object
+    // runs the onEachFeature function once for each piece of data in the array
     var earthquakes = L.geoJSON(quakeData, {
       onEachFeature: onEachFeature
     });
