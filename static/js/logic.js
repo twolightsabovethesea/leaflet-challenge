@@ -22,7 +22,7 @@ d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geoj
       onEachFeature: onEachFeature
     });
   
-    // Send our earthquakes layer to the createMap function/
+    // sends the earthquakes layer to the createMap function
     createMap(earthquakes);
   }
   
@@ -45,12 +45,12 @@ d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geoj
       "Topographic Map": topo
     };
   
-    // Create an overlay object to hold our overlay.
+    // create an overlay object for the overlay
     var overlayMaps = {
       Earthquakes: earthquakes
     };
   
-    // Create our map, giving it the streetmap and earthquakes layers to display on load.
+    // creates the map with streetmap and earthquakes layers 
     var myMap = L.map("map", {
       center: [
         37.09, -95.71
@@ -59,9 +59,9 @@ d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geoj
       layers: [streetmap, earthquakes]
     });
   
-    // Create a layer control.
-    // Pass it our baseMaps and overlayMaps.
-    // Add the layer control to the map.
+    // creates a layer control
+    // passes it our baseMaps and overlayMaps
+    // adds the layer control to the map
     L.control.layers(baseMaps, overlayMaps, {
       collapsed: false
     }).addTo(myMap);
