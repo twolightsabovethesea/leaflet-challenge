@@ -7,6 +7,7 @@ d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geoj
     console.log(data);
   });
 
+// creates a function to set marker color based on earthquake depth
 function colorSelect(depth){
     if (depth > 90) {
         return 'red'
@@ -26,6 +27,7 @@ function colorSelect(depth){
     else {return 'green'}
 };
 
+// creates a function to set radius size for markers based on magnitude
 function radiusSize(mag){
     return mag * 10
 };
