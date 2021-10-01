@@ -7,6 +7,29 @@ d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geoj
     console.log(data);
   });
 
+function colorSelect(depth){
+    if (depth > 90) {
+        return 'red'
+    } 
+    else if (depth > 70) {
+        return 'lightsalmon'
+    } 
+    else if (depth > 50) {
+        return 'gold'
+    } 
+    else if (depth > 30) {
+        return 'yellow'
+    } 
+    else if (depth >10) {
+        return 'yellow'
+    } 
+    else {return 'green'}
+};
+
+function radiusSize(mag){
+    return mag * 10
+};
+
 // create a function
   function createFeatures(quakeData) {
 
@@ -19,7 +42,19 @@ d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geoj
     // creates a GeoJSON layer that contains the features array on the quakeData object
     // runs the onEachFeature function once for each piece of data in the array
     var earthquakes = L.geoJSON(quakeData, {
-      onEachFeature: onEachFeature
+      onEachFeature: onEachFeature,
+      pointToLayer: function(feature, latlng) {
+          return L.circleMarker(latlng)
+      },
+      style : function(feature){
+          return {
+            color: 'white',
+            fillColor: colorSelect(feature.geometry.coordinates[2]),
+            fillOpacity: 0.5,
+            radius: radiusSize(feature.properties.mag)
+
+          }
+      }
     });
   
     // sends the earthquakes layer to the createMap function
