@@ -13,13 +13,13 @@ function colorSelect(depth){
         return 'red'
     } 
     else if (depth > 70) {
-        return 'lightsalmon'
+        return 'darkorange'
     } 
     else if (depth > 50) {
-        return 'gold'
+        return 'lightsalmon'
     } 
     else if (depth > 30) {
-        return 'yellow'
+        return 'gold'
     } 
     else if (depth >10) {
         return 'yellow'
