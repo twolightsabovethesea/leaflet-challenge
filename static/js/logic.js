@@ -1,5 +1,7 @@
 
 
+
+
 // Perform a GET request to retrieve the geojson earthquake data/
 d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson").then(function (data) {
     // Once we get a response, send the data.features object to the createFeatures function.
@@ -29,6 +31,9 @@ function colorSelect(depth){
 
 // creates a function to set radius size for markers based on magnitude
 function radiusSize(mag){
+    if (mag == 0){
+        return 1
+    }
     return mag * 10
 };
 
@@ -102,8 +107,37 @@ function radiusSize(mag){
     L.control.layers(baseMaps, overlayMaps, {
       collapsed: false
     }).addTo(myMap);
+
+    // creates legend
+
+    var legend = L.control({
+        position : 'bottomright',    
+    });
+
+    // creates function to add colors and info to legend
+
+    legend.onAdd = function() {
+        var div = L.DomUtil.create("div", "info legend");
+        var grades = [-10, 10, 30, 50, 70, 90];
+        var colors = [
+          "#98EE00",
+          "#D4EE00",
+          "#EECC00",
+          "#EE9C00",
+          "#EA822C",
+          "#EA2C2C"
+        ];
+        for (var i = 0; i < grades.length; i++) {
+            div.innerHTML += "<i style='background: " + colors[i] + "'></i> "
+            + grades[i] + (grades[i + 1] ? "&ndash;" + grades[i + 1] + "<br>" : "+");
+          }
+          return div;
+        };
+        legend.addTo(myMap);
   
   }
+
+
 
   /// EDITS ABOVE ///
 
